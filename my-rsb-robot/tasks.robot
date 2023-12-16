@@ -6,6 +6,7 @@ Library             RPA.HTTP
 Library             RPA.Excel.Files
 Library             RPA.Tables
 Library             RPA.PDF
+Library             RPA.Robocorp.Vault
 
 
 *** Variables ***
@@ -57,8 +58,9 @@ Fill and submit the form for one person
     Click Button    Submit
 
 Log in
-    Input Text    username    maria
-    Input Password    password    thoushallnotpass
+    ${account}=    Get Secret    robotsparebin
+    Input Text    username    ${account}[username]
+    Input Password    password    ${account}[password]
     Submit Form
     Wait Until Page Contains Element    id:sales-form
 
